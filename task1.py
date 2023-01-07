@@ -14,27 +14,24 @@
 # с первым элементом первой строки второй матрицы и т.д.
 
 class Matrix:
-    def __init__(self, lst_1, lst_2):
-        self.lst_1 = lst_1
-        self.lst_2 = lst_2
-
+    def __init__(self, my_matrix):
+        self.my_matrix = my_matrix
+        
 
     def __str__(self):
-        return '\n'.join('\t'.join(map(str, lst_1)) for lst_1 in self.lst_1)
+        return '\n'.join('\t'.join(map(str, my_matrix)) for my_matrix in self.my_matrix)
 
 
-    def __add__(self):
+    def __add__(self,other):
         result = [[0, 0, 0],
                 [0, 0, 0],
                 [0, 0, 0]]
-        for i in range(len(self.lst_1)):
-            for j in range(len(self.lst_2[i])):
-                result[i][j] = self.lst_1[i][j] + self.lst_2[i][j]
-        return str('\n'.join(['\t'.join([str(j) for j in i]) for i in result]))
+        for i in range(len(self.my_matrix)):
+            for j in range(len(other.my_matrix[i])):
+                result[i][j] = self.my_matrix[i][j] + other.my_matrix[i][j]
+        return Matrix(result)
 
 
-m = Matrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]],
-            [[1, 2, 3], [4, 5, 6], [7, 8, 9]])
-print(m)
-print()
-print(m.__add__())
+matrix_1 = Matrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+matrix_2 = Matrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+print(matrix_1 + matrix_2)
